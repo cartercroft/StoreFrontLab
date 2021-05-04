@@ -59,8 +59,7 @@ namespace StoreFrontLab.DATA.EF
         #region ProductMake Metadata
         public class ProductMakeMetadata
         {
-            [Required(ErrorMessage = "Value is a required field.")]
-            public int MakeID { get; set; }
+            public int MakeID { get; }
 
             [Required(ErrorMessage = "Value is a required field.")]
             public string MakeName { get; set; }
@@ -76,9 +75,8 @@ namespace StoreFrontLab.DATA.EF
         #region ProductStatus Metadata
         public class ProductStatusMetadata
         {
-            [Required(ErrorMessage = "Value is a required field.")]
             [Display(Name = "Product Status ID")]
-            public int ProductStatusID { get; set; }
+            public int ProductStatusID { get;}
 
             [Required(ErrorMessage = "Value is a required field.")]
             [Display(Name = "Status Name")]
@@ -95,9 +93,8 @@ namespace StoreFrontLab.DATA.EF
         #region ProductType Metadata
         public class ProductTypeMetadata
         {
-            [Required(ErrorMessage = "Value is a required field.")]
             [Display(Name = "Type ID")]
-            public int TypeID { get; set; }
+            public int TypeID { get; }
 
             [Required(ErrorMessage = "Value is a required field.")]
             [Display(Name = "Type")]
