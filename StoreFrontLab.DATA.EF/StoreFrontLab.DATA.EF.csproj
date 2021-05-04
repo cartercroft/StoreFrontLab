@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Metadata\StoreFrontMetadata.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>StoreFront.tt</DependentUpon>
     </Compile>
