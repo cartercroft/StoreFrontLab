@@ -63,7 +63,7 @@ body {
     margin-left: 10%;
     padding-top: 6%;
     color: white;
-    z-index: 1000000000;
+    z-index: 10000;
     top: 18%;
 }
 
