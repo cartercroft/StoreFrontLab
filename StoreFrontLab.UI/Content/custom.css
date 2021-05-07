@@ -8,6 +8,10 @@ textarea{
     height: 45px;
 }
 
+.viewBagTitle h2{
+    margin-top: 500px;
+}
+
 /* Nav Links */
 ul.navbar-nav li:hover {
     color: #ff6a00;

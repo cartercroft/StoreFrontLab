@@ -193,9 +193,11 @@
     <Content Include="Content\custom.css" />
     <Content Include="Content\images\08e94df2-5e68-4bc5-b5bb-24d830bb3a4d.png" />
     <Content Include="Content\images\e1582666-f2b3-47c2-8c59-c2bff16a5a1c.jpg" />
+    <Content Include="Content\images\e5880ec7-7b63-4227-8972-b0d28819218f.jpg" />
     <Content Include="Content\images\noImage.png" />
     <Content Include="Content\images\t_08e94df2-5e68-4bc5-b5bb-24d830bb3a4d.png" />
     <Content Include="Content\images\t_e1582666-f2b3-47c2-8c59-c2bff16a5a1c.jpg" />
+    <Content Include="Content\images\t_e5880ec7-7b63-4227-8972-b0d28819218f.jpg" />
     <Content Include="Content\images\t_noImage.png" />
     <Content Include="Content\img\banner.jpg" />
     <Content Include="Content\img\customer1.jpg" />
