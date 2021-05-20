@@ -2,14 +2,15 @@
     ViewBag.Title = "Home";
 }
 <div>
+    @* 1941 x 700 *@
     <img class="banner d-none d-sm-block" src="~/Content/img/banner.jpg">
     <div class="banner-text d-none d-sm-block animate-box" data-animate-effect="fadeInLeft">
-        <h2>We help you <br> to Build Your Dream Website</h2>
-        <div style="width: 45%">
-            Get amazing results working with the best programmers, designers, writers and other top
-            online pros.
-            Powered by FreeHTML5.co.<br><br>
-            <a href="#!" class="btn btn-banner">CHECK OUR PRICES</a>
+        <h2>Find your dream guitar!</h2>
+        <div style="width: 65%">
+            Check out our endless selection of wonderfully crafted guitars and accessories. We guarantee our
+            products are shipped with great care and each will show up in one piece. Click the button below
+            to browse our stock!
+            <a href="@Url.Action("Index", "Products")" class="btn btn-banner">GET SHOPPING</a>
         </div>
     </div>
 
