@@ -107,10 +107,18 @@ namespace StoreFrontLab.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
+            string img = product.ProductImage;
+
             if (product == null)
             {
                 return HttpNotFound();
             }
+
+            if(product.ProductImage != null)
+            {
+                product.ProductImage = img;
+            }
+
             ViewBag.MakeID = new SelectList(db.ProductMakes, "MakeID", "MakeName", product.MakeID);
             ViewBag.ProductStatusID = new SelectList(db.ProductStatuses, "ProductStatusID", "ProductStatusName", product.ProductStatusID);
             ViewBag.TypeID = new SelectList(db.ProductTypes, "TypeID", "TypeName", product.TypeID);

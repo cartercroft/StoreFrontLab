@@ -1,11 +1,26 @@
-﻿#login
+﻿.bg-gry
+{
+    background-color: #dddddd !important;
+}
+#login
 {
     font-size: 1.4em;
 }
-
-textarea{
+.btn a
+{
+    color: white;
+}
+.custTextArea{
     width: 82%;
-    height: 45px;
+    height: 6em;
+
+}
+
+.viewHeader{
+    margin-top: 3%;
+    font: bold;
+    font-size: 3.5em;
+    text-align: center;
 }
 
 /* Nav Links */

@@ -45,13 +45,13 @@ body {
 }
 
 .navbar-brand {
-    color: #24b540 !important;
+    color: #f00a0d !important;
     font-weight: bold;
     font-size: 25px !important;
 }
 
 .navbar-brand2 {
-    color: #f47d23;
+    color: #340404;
 }
 
 .banner {
@@ -59,9 +59,13 @@ body {
 }
 
 .banner-text {
+    border: #ffd04c 4px solid;
+    background-color: #460202;
+    padding: 1% 1%;
     position: absolute;
-    margin-left: 10%;
-    padding-top: 6%;
+    margin-left: 60%;
+    margin-right: 2%;
+    padding-top: 3%;
     color: white;
     z-index: 10000;
     top: 18%;
@@ -80,6 +84,7 @@ body {
 }
 
 .signup {
+    margin-top: 2%;
     background-color: #1f2533;
     color: white;
     padding: 35px 0px;

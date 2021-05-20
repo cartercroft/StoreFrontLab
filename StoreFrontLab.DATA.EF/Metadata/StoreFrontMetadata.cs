@@ -55,19 +55,20 @@ namespace StoreFrontLab.DATA.EF
     }
     #endregion
     #region ProductMake Metadata
-    //public class ProductMakeMetadata
-    //{
+    public class ProductMakeMetadata
+    {
     //    public int MakeID { get; }
 
-    //    [Required(ErrorMessage = "Value is a required field.")]
-    //    public string MakeName { get; set; }
-    //}
+        [Required(ErrorMessage = "Value is a required field.")]
+        [Display(Name = "Make")]
+        public string MakeName { get; set; }
+    }
 
-    //[MetadataType(typeof(ProductMakeMetadata))]
-    //public partial class ProductMake
-    //{
+    [MetadataType(typeof(ProductMakeMetadata))]
+    public partial class ProductMake
+    {
 
-    //}
+    }
     #endregion
 
     #region ProductStatus Metadata
@@ -77,7 +78,7 @@ namespace StoreFrontLab.DATA.EF
         public int ProductStatusID { get; }
 
         [Required(ErrorMessage = "Value is a required field.")]
-        [Display(Name = "Status Name")]
+        [Display(Name = "Status")]
         public string ProductStatusName { get; set; }
     }
 
@@ -89,15 +90,21 @@ namespace StoreFrontLab.DATA.EF
     #endregion
 
     #region ProductType Metadata
-    //public class ProductTypeMetadata
-    //{
-    //    [Display(Name = "Type ID")]
-    //    public int TypeID { get; }
+    public class ProductTypeMetadata
+    {
+        [Display(Name = "Type ID")]
+        public int TypeID { get; }
 
-    //    [Required(ErrorMessage = "Value is a required field.")]
-    //    [Display(Name = "Type")]
-    //    public string TypeName { get; set; }
-    //}
+        [Required(ErrorMessage = "Value is a required field.")]
+        [Display(Name = "Type")]
+        public string TypeName { get; set; }
+    }
+
+    [MetadataType(typeof(ProductTypeMetadata))]
+    public partial class ProductType
+    {
+
+    }
     #endregion
 }
 
