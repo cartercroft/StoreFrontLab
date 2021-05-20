@@ -85,13 +85,22 @@
             </dd>
 
         </dl>
+        <p>
+            @using (Html.BeginForm("AddToCart", "Products", new { @product = Model.ProductID }, FormMethod.Post, new { @class = "text-center" }))
+            {
+                @Html.HiddenFor(p => p.ProductID)
+                <span class="label">Quantity: </span>
+                @Html.TextBox("Quantity", 1, new { @class = "form-control", @style = "max-width: 4em; display: inline;"})
+                <input type="submit" value="Add To Cart" class="btn btn-primary" name="quantity" />          
+            }
+        </p>
     </div>
-    @if(Request.IsAuthenticated && User.IsInRole("Admin"))
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
     {
         <p>
             <button class="btn btn-warning">@Html.ActionLink("Edit", "Edit", new { id = Model.ProductID })</button>
             <button class="btn btn-dark">@Html.ActionLink("Back to List", "Index")</button>
         </p>
-    }
+        }
     
 </div>

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using StoreFrontLab.DATA.EF;
 using System.Drawing;
 using StoreFrontLab.UI.Utilities;
+using StoreFrontLab.UI.Models;
 
 namespace StoreFrontLab.UI.Controllers
 {
@@ -23,6 +24,42 @@ namespace StoreFrontLab.UI.Controllers
             return View(products.ToList());
         }
 
+        public ActionResult AddToCart(int quantity, int productID)
+        {
+            Dictionary<int, CartItemViewModel> shoppingCart = null;
+
+            if(Session["cart"] != null)
+            {
+                shoppingCart = (Dictionary<int, CartItemViewModel>)Session["cart"];
+            }
+
+            else
+            {
+                shoppingCart = new Dictionary<int, CartItemViewModel>();
+            }
+
+            Product product = db.Products.Where(p => p.ProductID == productID).FirstOrDefault();
+            if (product == null)
+            {
+                RedirectToAction("Index");
+            }
+            else
+            {
+                CartItemViewModel item = new CartItemViewModel(quantity, product);
+
+                if (shoppingCart.ContainsKey(product.ProductID))
+                {
+                    shoppingCart[product.ProductID].Quantity += quantity;
+                }
+                else
+                {
+                    shoppingCart.Add(product.ProductID, item);
+                }
+
+                Session["cart"] = shoppingCart;
+            }
+            return RedirectToAction("Index", "ShoppingCart");
+        }
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
