@@ -57,6 +57,15 @@
                     <li class="nav-item">
                         <a class="nav-link nav-btn" href="@Url.Action("Contact", "Home")">CONTACT</a>
                     </li>
+                    @if (Request.IsAuthenticated && User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link nav-btn" href="/ShoppingCart/Index">
+                                Shopping Cart<i class="fa fa-shopping-cart"><span class="text-dark">@ViewBag.CountItems</span></i>
+                            </a>
+                        </li>
+                    }
+
                 </ul>
             </div>
         </div>
@@ -92,7 +101,7 @@
         </div>*@
 
     <div class="signup">
-        
+
     </div>
 
 

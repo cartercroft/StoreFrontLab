@@ -43,6 +43,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ProductType.TypeName)
                     </th>
+                    @*<th></th>*@
                     <th></th>
                 </tr>
 
@@ -76,6 +77,17 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ProductType.TypeName)
                         </td>
+                        @*<td>
+                            <p>
+                                @using (Html.BeginForm("AddToCart", "Products", new { @product = item.ProductID }, FormMethod.Post, new { @class = "text-center" }))
+                                {
+                                    @Html.HiddenFor(modelItem => item.ProductID)
+                                    <span class="label">Quantity: </span>
+                                    @Html.TextBox("Quantity", 1, new { @class = "form-control", @style = "max-width: 4em; display: inline;" })
+                                    <input type="submit" value="Add To Cart" class="btn btn-primary" name="quantity" />
+                                }
+                            </p>
+                        </td>*@
                         <td>
                             @Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "btn btn-info btn-sm align-middle" })
                             &nbsp;
