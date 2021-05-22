@@ -1,4 +1,4 @@
-﻿@model IEnumerable<List<StoreFrontLab.DATA.EF.Product>>
+﻿@model List<StoreFrontLab.DATA.EF.Product>
 
 @{
     StoreFrontLab.DATA.EF.StoreFrontEntities db = new StoreFrontLab.DATA.EF.StoreFrontEntities();
@@ -28,11 +28,24 @@
                 {
                     if (item.IsFeatured)
                     {
+
                         <div class="text-center col-md-4 animate-box" data-animate-effect="fadeInLeft">
                             <div class="price-box">
-                                <img src="~/Content/images/@item.ProductImage" alt="@item.ProductName" style="max-height: 10rem; max-width: 12rem;" />
+                                <div class="imageContainer">
+                                    <img src="~/Content/images/@item.ProductImage" alt="@item.ProductName" style="max-height: 10rem; max-width: 12rem;" />
+                                </div>
                                 <h3>@item.ProductName</h3>
-                                <p>@item.Price</p>
+                                <div class="priceBoxContent">
+                                    <div>
+                                        <span><strike>@String.Format("{0:c}", item.Price)</strike></span> &nbsp;
+                                        <span class="discountPrice"><b>@String.Format("{0:c}", item.Price * .75m)</b></span>
+                                    </div>
+                                    <div>
+                                        @*<span>Make: @Html.DisplayFor(x => item.ProductMake.MakeName)</span>
+            <p>Model: @Html.DisplayFor(x => item.Model)</p>*@
+                                        <span>@Html.DisplayFor(x => item.Description)</span>
+                                    </div>
+                                </div>
                                 <p></p>
                             </div>
                         </div>
