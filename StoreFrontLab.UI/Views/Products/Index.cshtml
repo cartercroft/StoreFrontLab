@@ -6,8 +6,8 @@
 
 <h2 class="text-center viewHeader">@ViewBag.Title</h2>
 
-    <div class="row">
-        <div class="offset-md-1 col-md-10">
+    <li class="row">
+        <li class="offset-md-1 col-md-10" style="list-style:none">
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
                 <p>
@@ -43,7 +43,10 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ProductType.TypeName)
                     </th>
-                    @*<th></th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsFeatured)
+                    </th>
+                    <th></th>
                     <th></th>
                 </tr>
 
@@ -77,8 +80,11 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ProductType.TypeName)
                         </td>
-                        @*<td>
-                            <p>
+                        <td>
+                            @Html.CheckBoxFor(modelItem => item.IsFeatured, new { @disabled = "disabled"})
+                        </td>
+                        <td>
+                            @*<p>
                                 @using (Html.BeginForm("AddToCart", "Products", new { @product = item.ProductID }, FormMethod.Post, new { @class = "text-center" }))
                                 {
                                     @Html.HiddenFor(modelItem => item.ProductID)
@@ -86,17 +92,21 @@
                                     @Html.TextBox("Quantity", 1, new { @class = "form-control", @style = "max-width: 4em; display: inline;" })
                                     <input type="submit" value="Add To Cart" class="btn btn-primary" name="quantity" />
                                 }
-                            </p>
-                        </td>*@
+                            </p>*@
+                            @*@Html.ActionLink()*@
+                        </td>
                         <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "btn btn-info btn-sm align-middle" })
-                            &nbsp;
-                            @if (User.IsInRole("Admin") && Request.IsAuthenticated)
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-dark btn-sm align-bottom" })
-                                @:&nbsp;
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger btn-sm align-middle" })
-                            }
+                            <ul style="list-style:none">                                
+                                @if (User.IsInRole("Admin") && Request.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "align-bottom" })</li>
+                                }
+                                    <li>@Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "align-middle" })</li>
+                                @if (User.IsInRole("Admin") && Request.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "align-top" })</li>
+                                }
+                            </ul>
                         </td>
                     </tr>
                 }

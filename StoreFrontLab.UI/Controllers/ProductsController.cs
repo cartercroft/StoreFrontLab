@@ -45,6 +45,10 @@ namespace StoreFrontLab.UI.Controllers
             }
             else
             {
+                if(!User.Identity.IsAuthenticated)
+                {
+                    return RedirectToAction("Register", "Account");
+                }
                 CartItemViewModel item = new CartItemViewModel(quantity, product);
 
                 if (shoppingCart.ContainsKey(product.ProductID))
@@ -91,7 +95,7 @@ namespace StoreFrontLab.UI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,Price,UnitsSold,TypeID,MakeID,Model,ProductStatusID,Description,ProductImage")] Product product, HttpPostedFileBase productImage)
+        public ActionResult Create([Bind(Include = "ProductID,ProductName,Price,UnitsSold,TypeID,MakeID,Model,ProductStatusID,Description,ProductImage,IsFeatured")] Product product, HttpPostedFileBase productImage)
         {
             if (ModelState.IsValid)
             {
@@ -168,7 +172,7 @@ namespace StoreFrontLab.UI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,Price,UnitsSold,TypeID,MakeID,Model,ProductStatusID,Description,ProductImage")] Product product, HttpPostedFileBase productImage)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,Price,UnitsSold,TypeID,MakeID,Model,ProductStatusID,Description,ProductImage,IsFeatured")] Product product, HttpPostedFileBase productImage)
         {
             if (ModelState.IsValid)
             {

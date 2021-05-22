@@ -18,7 +18,7 @@
             <dd>
                 @Html.DisplayFor(model => model.ProductName)
             </dd>
-
+            
             <dt>
                 @Html.DisplayNameFor(model => model.Price)
             </dt>
@@ -83,7 +83,12 @@
             <dd>
                 @Html.DisplayFor(model => model.ProductType.TypeName)
             </dd>
-
+            <dt>
+                @Html.DisplayNameFor(model => model.IsFeatured)
+            </dt>
+            <dd>
+                @Html.CheckBoxFor(model => model.IsFeatured, new { @disabled = "disabled" })
+            </dd>
         </dl>
         <p>
             @using (Html.BeginForm("AddToCart", "Products", new { @product = Model.ProductID }, FormMethod.Post, new { @class = "text-center" }))

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StoreFrontModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StoreFrontModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ProductMakes">
           <Key>
             <PropertyRef Name="MakeID" />
@@ -26,6 +26,7 @@
           <Property Name="ProductStatusID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ProductImage" Type="varchar" MaxLength="50" />
+          <Property Name="IsFeatured" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductStatuses">
           <Key>
@@ -95,8 +96,7 @@
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StoreFrontModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -125,6 +125,7 @@
           <NavigationProperty Name="ProductMake" Relationship="Self.FK_Products_ProductMakes" FromRole="Products" ToRole="ProductMakes" />
           <NavigationProperty Name="ProductStatus" Relationship="Self.FK_Products_ProductStatuses" FromRole="Products" ToRole="ProductStatuses" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_Products_ProductTypes" FromRole="Products" ToRole="ProductTypes" />
+          <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductStatus">
           <Key>
@@ -213,6 +214,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="StoreFrontModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
