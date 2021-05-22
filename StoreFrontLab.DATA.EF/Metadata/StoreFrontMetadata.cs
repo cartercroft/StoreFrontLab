@@ -57,7 +57,7 @@ namespace StoreFrontLab.DATA.EF
     #region ProductMake Metadata
     public class ProductMakeMetadata
     {
-    //    public int MakeID { get; }
+        public int MakeID { get; }
 
         [Required(ErrorMessage = "Value is a required field.")]
         [Display(Name = "Make")]

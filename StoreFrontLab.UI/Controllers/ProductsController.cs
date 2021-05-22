@@ -188,14 +188,25 @@ namespace StoreFrontLab.UI.Controllers
                     string[] goodExts = { ".jpg", ".jpeg", ".png", ".gif" };
 
                     // Check that the file extension is in our list of acceptable extensions AND check that the file size is 4MB MAX
-                    if (goodExts.Contains(ext.ToLower()) && productImage.ContentLength <= 5242880)                    {
+                    if (goodExts.Contains(ext.ToLower()) && productImage.ContentLength <= 5242880)
+                    {
 
                         // Create a new file name (using a GUID)
                         file = Guid.NewGuid() + ext;
 
-                        #region Resize Image                        // This informs the program to save the image to this location in our file structure.
-                        string savePath = Server.MapPath("~/Content/images/");                        Image convertedImage = Image.FromStream(productImage.InputStream);                        int maxImageSize = 400;                        int maxThumbSize = 100;                        ImageServices.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
-                        #endregion
+                        #region Resize Image
+                        // This informs the program to save the image to this location in our file structure.
+                        string savePath = Server.MapPath("~/Content/images/");
+
+                        Image convertedImage = Image.FromStream(productImage.InputStream);
+
+                        int maxImageSize = 400;
+
+                        int maxThumbSize = 100;
+
+                        ImageServices.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+                        #endregion
+
                         // The code below will delete the old image from the file structure.
                         if (product.ProductImage != null && product.ProductImage != "noImage.png")
                         {
