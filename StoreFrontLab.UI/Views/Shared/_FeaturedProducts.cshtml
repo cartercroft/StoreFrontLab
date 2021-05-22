@@ -1,57 +1,88 @@
-﻿@model StoreFrontLab.DATA.EF.Product
+﻿@model IEnumerable<List<StoreFrontLab.DATA.EF.Product>>
+
+@{
+    StoreFrontLab.DATA.EF.StoreFrontEntities db = new StoreFrontLab.DATA.EF.StoreFrontEntities();
+    var query = db.Products.Where(x => x.IsFeatured);
+    List<StoreFrontLab.DATA.EF.Product> featured = query.ToList();
+}
+
 <div class="smoke">
     <div class="container" id="fh5co-pricing">
 
         <div class="heading animate-box"><h2><b>FEATURED PRODUCTS</b></h2></div>
         <div class="text-center animate-box"><h3>Lorem ipsum lahore</h3></div>
         <br><br>
+        @* Start foreach, iterating through featured products *@
+        @if (featured == null)
+        {
+            <div class="container">
+                <p class="text-center alert alert-warning">
+                    No featured products available at this time.
+                </p>
+            </div>
+        }
+        else
+        {
             <div class="row">
-                @* Start foreach, iterating through featured products *@
-                <div class="col-sm-4 animate-box" data-animate-effect="fadeInLeft">
-                    <div class="price-box">
-                        <h3><b>[PRODUCT NAME]</b></h3>
-                        <h2 class="text-org"><b>Brought to you by: [PRODUCT MAKE]</b></h2>
-                        <h3><b>PER MONTH</b></h3>
-                        <div class="gr-line"></div>
-                        <div>50 GB DISK SPACE</div>
-                        <div class="gr-line"></div>
-                        <div>100 GB BANDWIDTH</div>
-                        <div class="gr-line"></div>
-                        <div>FREE DOMAIN REGISTRATION</div>
-                        <br>
-                        <button class="btn btn-banner">GET STARTED</button>
-                    </div>
-                </div>
-                <div class="col-sm-4 animate-box" data-animate-effect="fadeInLeft">
-                    <div class="price-box">
-                        <h3><b>[PRODUCT NAME]</b></h3>
-                        <h2 class="text-org"><b>Brought to you by: [PRODUCT MAKE]</b></h2>
-                        <h3><b>PER MONTH</b></h3>
-                        <div class="gr-line"></div>
-                        <div>50 GB DISK SPACE</div>
-                        <div class="gr-line"></div>
-                        <div>100 GB BANDWIDTH</div>
-                        <div class="gr-line"></div>
-                        <div>FREE DOMAIN REGISTRATION</div>
-                        <br>
-                        <button class="btn btn-banner">GET STARTED</button>
-                    </div>
-                </div>
-                <div class="col-sm-4 animate-box" data-animate-effect="fadeInLeft">
-                    <div class="price-box">
-                        <h3><b>[PRODUCT NAME]</b></h3>
-                        <h2 class="text-org"><b>Brought to you by: [PRODUCT MAKE]</b></h2>
-                        <h3><b>PER MONTH</b></h3>
-                        <div class="gr-line"></div>
-                        <div>50 GB DISK SPACE</div>
-                        <div class="gr-line"></div>
-                        <div>100 GB BANDWIDTH</div>
-                        <div class="gr-line"></div>
-                        <div>FREE DOMAIN REGISTRATION</div>
-                        <br>
-                        <button class="btn btn-banner">GET STARTED</button>
-                    </div>
+                @foreach (var item in featured)
+                {
+                    if (item.IsFeatured)
+                    {
+                        <div class="text-center col-md-4 animate-box" data-animate-effect="fadeInLeft">
+                            <div class="price-box">
+                                <img src="~/Content/images/@item.ProductImage" alt="@item.ProductName" style="max-height: 10rem; max-width: 12rem;" />
+                                <h3>@item.ProductName</h3>
+                                <p>@item.Price</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+        @*<div class="col-sm-4 animate-box" data-animate-effect="fadeInLeft">
+                <div class="price-box">
+                    <h3><b>[PRODUCT NAME]</b></h3>
+                    <h2 class="text-org"><b>Brought to you by: [PRODUCT MAKE]</b></h2>
+                    <h3><b>PER MONTH</b></h3>
+                    <div class="gr-line"></div>
+                    <div>50 GB DISK SPACE</div>
+                    <div class="gr-line"></div>
+                    <div>100 GB BANDWIDTH</div>
+                    <div class="gr-line"></div>
+                    <div>FREE DOMAIN REGISTRATION</div>
+                    <br>
+                    <button class="btn btn-banner">GET STARTED</button>
                 </div>
             </div>
+            <div class="col-sm-4 animate-box" data-animate-effect="fadeInLeft">
+                <div class="price-box">
+                    <h3><b>[PRODUCT NAME]</b></h3>
+                    <h2 class="text-org"><b>Brought to you by: [PRODUCT MAKE]</b></h2>
+                    <h3><b>PER MONTH</b></h3>
+                    <div class="gr-line"></div>
+                    <div>50 GB DISK SPACE</div>
+                    <div class="gr-line"></div>
+                    <div>100 GB BANDWIDTH</div>
+                    <div class="gr-line"></div>
+                    <div>FREE DOMAIN REGISTRATION</div>
+                    <br>
+                    <button class="btn btn-banner">GET STARTED</button>
+                </div>
+            </div>
+            <div class="col-sm-4 animate-box" data-animate-effect="fadeInLeft">
+                <div class="price-box">
+                    <h2 class="text-org"><b>Brought to you by: [PRODUCT MAKE]</b></h2>
+                    <img src="/Content/images/t_08e94df2-5e68-4bc5-b5bb-24d830bb3a4d.png" style="max-height: 20rem; max-width: 15rem;" />
+                    <h3><b>[PRODUCT NAME]</b></h3>
+                    <p>[PRICE]</p>
+                    <ul style="list-style: none">
+                        <li>Make: xxxxx</li>
+                        <li>Model: xxxxx</li>
+                    </ul>
+                    <br>
+                    <button class="btn btn-banner">GET STARTED</button>
+                </div>
+            </div>*@
     </div>
 </div>

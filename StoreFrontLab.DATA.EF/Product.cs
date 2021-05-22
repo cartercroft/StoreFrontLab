@@ -24,6 +24,7 @@ namespace StoreFrontLab.DATA.EF
         public int ProductStatusID { get; set; }
         public string Description { get; set; }
         public string ProductImage { get; set; }
+        public bool IsFeatured { get; set; }
     
         public virtual ProductMake ProductMake { get; set; }
         public virtual ProductStatus ProductStatus { get; set; }

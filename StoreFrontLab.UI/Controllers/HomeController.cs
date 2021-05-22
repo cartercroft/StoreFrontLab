@@ -1,14 +1,23 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using StoreFrontLab.DATA.EF;
+using System.Drawing;
+using StoreFrontLab.UI.Utilities;
 using StoreFrontLab.UI.Models;
 using System.Net.Mail;
-using System.Net;
 using System.Configuration;
-using System;
 
 namespace StoreFrontLab.UI.Controllers
 {
     public class HomeController : Controller
     {
+        private StoreFrontEntities db = new StoreFrontEntities();
         [HttpGet]
         public ActionResult Index()
         {
