@@ -6,15 +6,16 @@
 
 <h2 class="text-center viewHeader">@ViewBag.Title</h2>
 
-    <li class="row">
-        <li class="offset-md-1 col-md-10" style="list-style:none">
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                <p>
-                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
-                </p>
-            }
-            <table class="table">
+<div class="row">
+    <div class="offset-md-1 col-md-10" style="list-style:none">
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <p>
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+            </p>
+        }
+        <table class="table data-table table-striped">
+            <thead>
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.ProductName)
@@ -29,8 +30,8 @@
                         @Html.DisplayNameFor(model => model.Model)
                     </th>
                     @*<th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>*@
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.ProductImage)
                     </th>
@@ -49,7 +50,9 @@
                     <th></th>
                     <th></th>
                 </tr>
+            </thead>
 
+            <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -66,8 +69,8 @@
                             @Html.DisplayFor(modelItem => item.Model)
                         </td>
                         @*<td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>*@
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>*@
                         <td>
                             <img src="~/Content/images/t_@item.ProductImage" alt="@item.ProductName" title="@item.ProductName" />
                         </td>
@@ -81,27 +84,27 @@
                             @Html.DisplayFor(modelItem => item.ProductType.TypeName)
                         </td>
                         <td>
-                            @Html.CheckBoxFor(modelItem => item.IsFeatured, new { @disabled = "disabled"})
+                            @Html.CheckBoxFor(modelItem => item.IsFeatured, new { @disabled = "disabled" })
                         </td>
                         <td>
                             @*<p>
-                                @using (Html.BeginForm("AddToCart", "Products", new { @product = item.ProductID }, FormMethod.Post, new { @class = "text-center" }))
-                                {
-                                    @Html.HiddenFor(modelItem => item.ProductID)
-                                    <span class="label">Quantity: </span>
-                                    @Html.TextBox("Quantity", 1, new { @class = "form-control", @style = "max-width: 4em; display: inline;" })
-                                    <input type="submit" value="Add To Cart" class="btn btn-primary" name="quantity" />
-                                }
-                            </p>*@
+                                    @using (Html.BeginForm("AddToCart", "Products", new { @product = item.ProductID }, FormMethod.Post, new { @class = "text-center" }))
+                                    {
+                                        @Html.HiddenFor(modelItem => item.ProductID)
+                                        <span class="label">Quantity: </span>
+                                        @Html.TextBox("Quantity", 1, new { @class = "form-control", @style = "max-width: 4em; display: inline;" })
+                                        <input type="submit" value="Add To Cart" class="btn btn-primary" name="quantity" />
+                                    }
+                                </p>*@
                             @*@Html.ActionLink()*@
                         </td>
                         <td>
-                            <ul style="list-style:none">                                
+                            <ul style="list-style:none">
                                 @if (User.IsInRole("Admin") && Request.IsAuthenticated)
                                 {
                                     <li>@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "align-bottom" })</li>
                                 }
-                                    <li>@Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "align-middle" })</li>
+                                <li>@Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "align-middle" })</li>
                                 @if (User.IsInRole("Admin") && Request.IsAuthenticated)
                                 {
                                     <li>@Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "align-top" })</li>
@@ -110,7 +113,17 @@
                         </td>
                     </tr>
                 }
+            </tbody>
 
-            </table>
-        </div>
+        </table>
     </div>
+</div>
+
+@section scripts {
+    <script>
+        // Apply the jQuery plugin function.
+        $(document).ready(function () {
+            $(".data-table").DataTable();
+        });
+    </script>
+}
