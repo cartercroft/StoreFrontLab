@@ -257,6 +257,13 @@ namespace StoreFrontLab.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        //public PartialViewResult _FeaturedProducts()
+        //{
+        //    List<Product> featured = db.Products.Where(p => p.IsFeatured).ToList();
+        //    return PartialView(featured);
+
+        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
