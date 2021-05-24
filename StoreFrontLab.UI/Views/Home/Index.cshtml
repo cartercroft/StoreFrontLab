@@ -2,74 +2,22 @@
     ViewBag.Title = "Home";
 }
 <div>
+    @* 1941 x 700 *@
     <img class="banner d-none d-sm-block" src="~/Content/img/banner.jpg">
     <div class="banner-text d-none d-sm-block animate-box" data-animate-effect="fadeInLeft">
-        <h2>We help you <br> to Build Your Dream Website</h2>
-        <div style="width: 45%">
-            Get amazing results working with the best programmers, designers, writers and other top
-            online pros.
-            Powered by FreeHTML5.co.<br><br>
-            <a href="#!" class="btn btn-banner">CHECK OUR PRICES</a>
+        <h2>Find your dream guitar!</h2>
+        <div style="width: 90%">
+            Check out our endless selection of wonderfully crafted guitars and accessories. We guarantee our
+            products are shipped with great care and each will show up in one piece. Click the button below
+            to browse our stock!
         </div>
+        <hr />
+        <a href="@Url.Action("Index", "Products")" class="btn btn-banner">GET SHOPPING</a>
     </div>
 
 </div>
 @Html.Partial("_DomainSearchBanner")
-<div class="smoke">
-    <div class="container" id="fh5co-pricing">
-
-        <div class="heading animate-box"><h2><b>CHOOSE YOUR PLAN</b></h2></div>
-        <div class="text-center animate-box"><h3>Lorem ipsum lahore</h3></div>
-        <br><br>
-        <div class="row">
-            <div class="col-sm-4 animate-box" data-animate-effect="fadeInLeft">
-                <div class="price-box">
-                    <h3><b>BASIC PLAN</b></h3>
-                    <h2 class="text-org"><b>$4.99</b></h2>
-                    <h3><b>PER MONTH</b></h3>
-                    <div class="gr-line"></div>
-                    <div>50 GB DISK SPACE</div>
-                    <div class="gr-line"></div>
-                    <div>100 GB BANDWIDTH</div>
-                    <div class="gr-line"></div>
-                    <div>FREE DOMAIN REGISTRATION</div>
-                    <br>
-                    <button class="btn btn-banner">GET STARTED</button>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="price-box-dark animate-box">
-                    <h3><b>BASIC PLAN</b></h3>
-                    <h2 class="text-gr"><b>$4.99</b></h2>
-                    <h3><b>PER MONTH</b></h3>
-                    <div class="gr-line"></div>
-                    <div>50 GB DISK SPACE</div>
-                    <div class="gr-line"></div>
-                    <div>100 GB BANDWIDTH</div>
-                    <div class="gr-line"></div>
-                    <div>FREE DOMAIN REGISTRATION</div>
-                    <br>
-                    <button class="btn btn-banner">GET STARTED</button>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="price-box animate-box" data-animate-effect="fadeInRight">
-                    <h3><b>BASIC PLAN</b></h3>
-                    <h2 class="text-org"><b>$4.99</b></h2>
-                    <h3><b>PER MONTH</b></h3>
-                    <div class="gr-line"></div>
-                    <div>50 GB DISK SPACE</div>
-                    <div class="gr-line"></div>
-                    <div>100 GB BANDWIDTH</div>
-                    <div class="gr-line"></div>
-                    <div>FREE DOMAIN REGISTRATION</div>
-                    <br>
-                    <button class="btn btn-banner">GET STARTED</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("_FeaturedProducts")
 <div class="white">
     <div class="container" id="fh5co-features">
         <div class="heading animate-box">

@@ -1,0 +1,129 @@
+﻿@model IEnumerable<StoreFrontLab.DATA.EF.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2 class="text-center viewHeader">@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="offset-md-1 col-md-10" style="list-style:none">
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <p>
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+            </p>
+        }
+        <table class="table data-table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitsSold)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Model)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductMake.MakeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductStatus.ProductStatusName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductType.TypeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsFeatured)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitsSold)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Model)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>*@
+                        <td>
+                            <img src="~/Content/images/t_@item.ProductImage" alt="@item.ProductName" title="@item.ProductName" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductMake.MakeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductStatus.ProductStatusName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductType.TypeName)
+                        </td>
+                        <td>
+                            @Html.CheckBoxFor(modelItem => item.IsFeatured, new { @disabled = "disabled" })
+                        </td>
+                        <td>
+                            @*<p>
+                                    @using (Html.BeginForm("AddToCart", "Products", new { @product = item.ProductID }, FormMethod.Post, new { @class = "text-center" }))
+                                    {
+                                        @Html.HiddenFor(modelItem => item.ProductID)
+                                        <span class="label">Quantity: </span>
+                                        @Html.TextBox("Quantity", 1, new { @class = "form-control", @style = "max-width: 4em; display: inline;" })
+                                        <input type="submit" value="Add To Cart" class="btn btn-primary" name="quantity" />
+                                    }
+                                </p>*@
+                            @*@Html.ActionLink()*@
+                        </td>
+                        <td>
+                            <ul style="list-style:none">
+                                @if (User.IsInRole("Admin") && Request.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "align-bottom" })</li>
+                                }
+                                <li>@Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "align-middle" })</li>
+                                @if (User.IsInRole("Admin") && Request.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "align-top" })</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        // Apply the jQuery plugin function.
+        $(document).ready(function () {
+            $(".data-table").DataTable();
+        });
+    </script>
+}

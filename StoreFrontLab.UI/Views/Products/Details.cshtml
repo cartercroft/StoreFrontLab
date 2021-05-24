@@ -1,0 +1,111 @@
+﻿@model StoreFrontLab.DATA.EF.Product
+
+@{
+    ViewBag.Title = Model.ProductName + " Details";
+}
+
+<div class="container">
+    <h2 class="text-center viewHeader">@ViewBag.Title</h2>
+
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductName)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitsSold)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitsSold)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductImage)
+            </dt>
+
+            <dd>
+                <br />
+                <img src="~/Content/images/@Model.ProductImage" />
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductMake.MakeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductMake.MakeName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductStatus.ProductStatusName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductStatus.ProductStatusName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductType.TypeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductType.TypeName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsFeatured)
+            </dt>
+            <dd>
+                @Html.CheckBoxFor(model => model.IsFeatured, new { @disabled = "disabled" })
+            </dd>
+        </dl>
+        <p>
+            @using (Html.BeginForm("AddToCart", "Products", new { @product = Model.ProductID }, FormMethod.Post, new { @class = "text-center" }))
+            {
+                @Html.HiddenFor(p => p.ProductID)
+                <span class="label">Quantity: </span>
+                @Html.TextBox("Quantity", 1, new { @class = "form-control", @style = "max-width: 4em; display: inline;"})
+                <input type="submit" value="Add To Cart" class="btn btn-primary" name="quantity" />          
+            }
+        </p>
+    </div>
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <p>
+            <button class="btn btn-warning">@Html.ActionLink("Edit", "Edit", new { id = Model.ProductID })</button>
+            <button class="btn btn-dark">@Html.ActionLink("Back to List", "Index")</button>
+        </p>
+        }
+    
+</div>
