@@ -5,7 +5,7 @@
     {
         @Html.AntiForgeryToken()
 
-        <div id="login" style="font-size: .8rem">
+        <div id="login">
             <a href="@Url.Action("Index", "Manage")" title="Manage" class="text-white">
                 Hello @User.Identity.GetUserName()! |
             </a>

@@ -34,13 +34,13 @@ body {
     font-weight: bold;
 }
 
-.nav-btn:active {
-    color: #f37c20;
-    font-weight: bold;
-}
+    .nav-btn:active {
+        color: rgb(103,0,154);
+        font-weight: bold;
+    }
 
 .active {
-    color: #f37c20 !important;
+    color: rgb(103,0,154) !important;
     font-weight: bold;
 }
 
@@ -51,7 +51,7 @@ body {
 }
 
 .navbar-brand2 {
-    color: #340404;
+    color: rgb(184,3,245);
 }
 
 .banner {

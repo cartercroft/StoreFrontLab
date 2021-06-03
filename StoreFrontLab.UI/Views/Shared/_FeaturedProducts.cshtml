@@ -3,27 +3,35 @@
 @{
     StoreFrontLab.DATA.EF.StoreFrontEntities db = new StoreFrontLab.DATA.EF.StoreFrontEntities();
     var query = db.Products.Where(x => x.IsFeatured);
-    List<StoreFrontLab.DATA.EF.Product> featured = query.ToList();
+    List<StoreFrontLab.DATA.EF.Product> featured = null;
+
+    if(query.ToList().Count != 0)
+    {
+        featured = query.ToList();
+    }
 }
 
 <div class="smoke">
     <div class="container" id="fh5co-pricing">
 
-        <div class="heading animate-box"><h2><b>FEATURED PRODUCTS</b></h2></div>
-        <div class="text-center animate-box"><h3>Lorem ipsum lahore</h3></div>
+        <div class="heading animate-box text-center"><h2 ><b>FEATURED PRODUCTS</b></h2></div>
+        <div class="text-center animate-box"><h3 class="">Sick gear at a discount!</h3></div>
         <br><br>
         @* Start foreach, iterating through featured products *@
         @if (featured == null)
         {
-            <div class="container">
-                <p class="text-center alert alert-warning">
-                    No featured products available at this time.
-                </p>
+            
+            <div class="container featuredProducts">
+                <div class="col-md-12">
+                    <p class="text-center alert alert-warning">
+                        No featured products available at this time.
+                    </p>
+                </div>
             </div>
         }
         else
         {
-            <div class="row">
+            <div class="row" id="featuredProducts">
                 @foreach (var item in featured)
                 {
                     if (item.IsFeatured)
@@ -41,12 +49,9 @@
                                         <span class="discountPrice"><b>@String.Format("{0:c}", item.Price * .75m)</b></span>
                                     </div>
                                     <div>
-                                        @*<span>Make: @Html.DisplayFor(x => item.ProductMake.MakeName)</span>
-            <p>Model: @Html.DisplayFor(x => item.Model)</p>*@
                                         <span>@Html.DisplayFor(x => item.Description)</span>
                                     </div>
                                 </div>
-                                <p></p>
                             </div>
                         </div>
                     }

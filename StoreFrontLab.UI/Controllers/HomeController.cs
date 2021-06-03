@@ -25,15 +25,12 @@ namespace StoreFrontLab.UI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
+        { 
             return View();
         }
 
-        [HttpGet]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -82,8 +79,8 @@ namespace StoreFrontLab.UI.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.CustomerMessage = $"We're sorry, your request could not be completed. Please try again later.<br /><br />" +
-                    $"Error Message:<br /> {ex.StackTrace}";
+                ViewBag.CustomerMessage = $"<p class='text-center'>Your email was unable to be sent. Please try again later or contact support.</p><br /><br />" +
+                    $"<h2 class='text-center'>Error Message:</h2><br /> {ex.StackTrace}</p>";
                 return View(cvm);
             }
 

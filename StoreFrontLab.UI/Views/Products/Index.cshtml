@@ -4,6 +4,7 @@
     ViewBag.Title = "Products";
 }
 
+@Html.Partial("_FeaturedProducts")
 <h2 class="text-center viewHeader">@ViewBag.Title</h2>
 
 <div class="row">
@@ -48,7 +49,6 @@
                         @Html.DisplayNameFor(model => model.IsFeatured)
                     </th>
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
 
@@ -87,27 +87,16 @@
                             @Html.CheckBoxFor(modelItem => item.IsFeatured, new { @disabled = "disabled" })
                         </td>
                         <td>
-                            @*<p>
-                                    @using (Html.BeginForm("AddToCart", "Products", new { @product = item.ProductID }, FormMethod.Post, new { @class = "text-center" }))
-                                    {
-                                        @Html.HiddenFor(modelItem => item.ProductID)
-                                        <span class="label">Quantity: </span>
-                                        @Html.TextBox("Quantity", 1, new { @class = "form-control", @style = "max-width: 4em; display: inline;" })
-                                        <input type="submit" value="Add To Cart" class="btn btn-primary" name="quantity" />
-                                    }
-                                </p>*@
-                            @*@Html.ActionLink()*@
-                        </td>
-                        <td>
-                            <ul style="list-style:none">
+                            <ul class ="crudList"style="list-style:none">
                                 @if (User.IsInRole("Admin") && Request.IsAuthenticated)
                                 {
-                                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "align-bottom" })</li>
+                                    <li class="locked">@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "align-bottom" })</li>
+                                    
                                 }
                                 <li>@Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "align-middle" })</li>
                                 @if (User.IsInRole("Admin") && Request.IsAuthenticated)
                                 {
-                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "align-top" })</li>
+                                    <li class="locked">@Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "align-top" })</li>
                                 }
                             </ul>
                         </td>
