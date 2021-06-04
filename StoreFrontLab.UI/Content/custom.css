@@ -183,6 +183,7 @@ div.priceBoxContent {
 .emailSuccess {
     background-color: rgb(209,231,221);
     margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .email{
@@ -196,4 +197,8 @@ div.priceBoxContent {
 
 .text-red {
     color: #f00a0d !important;
+}
+
+#productsTable{
+    margin-bottom: 1%;
 }

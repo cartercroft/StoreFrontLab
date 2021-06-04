@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="~/Content/css/style.css">
     <link rel="stylesheet" href="~/Content/css/animate.css" />
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+
+    <link rel="icon" href="~/favicon.ico" />
     <script src="~/Content/js/modernizr-3.5.0.min.js"></script>
 </head>
 <body>
@@ -60,43 +62,11 @@
 
     @RenderBody()
 
-    @*<div class="smoke">
-            <div class="container" id="fh5co-contact">
-                <div class="heading animate-box"><h2><b>CONTACT US</b></h2></div>
-                <div class="text-center animate-box"><h3>Lorem ipsum lahore</h3></div>
-                <div class="row animate-box">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
-                        <form>
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Name</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Email</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Email</label>
-                                <textarea class="form-control" rows="5" placeholder="Msg Here"></textarea>
-                            </div>
-                            <button class="btn btn-banner">Send</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-    <div class="signup">
-
-    </div>
-
-
     <div class="dark">
         <div class="container animate-box" id="fh5co-footer">
             <div class="row">
                 <div class="col-sm-4">
-                    <div><a class="nsavbar-brand text-prpl" href="#">GUITAR <span class="navbar-brand2 text-red">GALAXY</span></a></div>
+                    <div><a class="nsavbar-brand text-prpl" href="@Url.Action("Index", "Home")">GUITAR <span class="navbar-brand2 text-red">GALAXY</span></a></div>
                     <br>
                     <div class="text-white">
                         Get amazing results working with the best programmers, designers, writers and
@@ -113,8 +83,8 @@
                             <td><a class="text-white" href="@Url.Action("Index","Products")">Shop</a></td>
                         </tr>
                         <tr>
-                            <td><a class="text-white" href="#!">Services</a></td>
-                            <td><a class="text-white" href="#!">Cart</a></td>
+                            <td><a class="text-white" href="http://fed1proj.croftcoding.com" target="_blank">Services</a></td>
+                            <td><a class="text-white" href="@Url.Action("Index", "ShoppingCart")">Cart</a></td>
                         </tr>
                         <tr>
                             <td><a class="text-white" href="@Url.Action("Contact", "Home")">Contact</a></td>

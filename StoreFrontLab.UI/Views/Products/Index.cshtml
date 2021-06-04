@@ -3,11 +3,9 @@
 @{
     ViewBag.Title = "Products";
 }
-
-@Html.Partial("_FeaturedProducts")
 <h2 class="text-center viewHeader">@ViewBag.Title</h2>
 
-<div class="row">
+<div class="row" id="productsTable">
     <div class="offset-md-1 col-md-10" style="list-style:none">
         @if (Request.IsAuthenticated && User.IsInRole("Admin"))
         {
@@ -30,9 +28,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Model)
                     </th>
-                    @*<th>
-                            @Html.DisplayNameFor(model => model.Description)
-                        </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.ProductImage)
                     </th>
@@ -68,9 +63,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Model)
                         </td>
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>*@
                         <td>
                             <img src="~/Content/images/t_@item.ProductImage" alt="@item.ProductName" title="@item.ProductName" />
                         </td>
@@ -87,7 +79,7 @@
                             @Html.CheckBoxFor(modelItem => item.IsFeatured, new { @disabled = "disabled" })
                         </td>
                         <td>
-                            <ul class ="crudList"style="list-style:none">
+                            <ul class="crudList" style="list-style:none">
                                 @if (User.IsInRole("Admin") && Request.IsAuthenticated)
                                 {
                                     <li class="locked">@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "align-bottom" })</li>

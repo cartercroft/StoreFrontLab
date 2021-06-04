@@ -45,6 +45,10 @@ namespace StoreFrontLab.DATA.EF
 
         [Display(Name = "Image")]
         public string ProductImage { get; set; }
+
+        [Display(Name = "Featured")]
+        public bool IsFeatured { get; set; }
+
     }
 
 

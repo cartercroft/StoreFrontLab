@@ -60,7 +60,7 @@ body {
 
 .banner-text {
     border: #ffd04c 4px solid;
-    background-color: #460202;
+    background-color: rgba(103,0,154, 7);
     padding: 1% 1%;
     position: absolute;
     margin-left: 60%;
@@ -83,8 +83,7 @@ body {
     padding: 15px 0px;
 }
 
-.signup {
-    margin-top: 2%;
+.break {
     background-color: #1f2533;
     color: white;
     padding: 35px 0px;
