@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using StoreFrontLab.DATA.EF;
 
 namespace StoreFrontLab.UI.Controllers
 {
@@ -154,12 +155,24 @@ namespace StoreFrontLab.UI.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "Customer");
+                    #region Assign UserDetails during registration
+                    UserDetail newUserDeets = new UserDetail();
+                    newUserDeets.UserID = user.Id;
+                    newUserDeets.FirstName = model.FirstName;
+                    newUserDeets.LastName = model.LastName;
+                    newUserDeets.FavoriteBand = model.FavoriteBand;
+
+                    StoreFrontEntities db = new StoreFrontEntities();
+                    db.UserDetails.Add(newUserDeets);
+                    db.SaveChanges();
+
+                    return View("Login");
+                    #endregion
                     //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     //ViewBag.Link = callbackUrl;
                     //return View("DisplayEmail");
-                    return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
             }

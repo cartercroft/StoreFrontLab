@@ -1,14 +1,28 @@
 ﻿@using Microsoft.AspNet.Identity
+@using StoreFrontLab.DATA.EF;
+
 @if (Request.IsAuthenticated)
 {
+    StoreFrontEntities db = new StoreFrontEntities();
+    string userID = User.Identity.GetUserId();
+    UserDetail currentUser = db.UserDetails.Where(details => details.UserID == userID).FirstOrDefault();
+    // Default in case of no matching record in our database.
+
+    string userName = "Guest";
+
+    //If we do get a match on UserDetail, use it to populate the values for the variables above.
+    if (currentUser != null)
+    {
+        userName = currentUser.FirstName + " " + currentUser.LastName;
+    }
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
         <div id="login">
-            <a href="@Url.Action("Index", "Manage")" title="Manage" class="text-white">
-                Hello @User.Identity.GetUserName()! |
-            </a>
+            <a href="@Url.Action("Index", "Manage")" title="Manage" class="text-white">Hello @userName!</a>
+             |
             <a href="javascript:document.getElementById('logoutForm').submit()" class="text-white">Log off</a>
         </div>
     }
