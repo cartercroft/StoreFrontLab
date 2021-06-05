@@ -1,0 +1,31 @@
+﻿@model StoreFrontLab.DATA.EF.ProductStatus
+
+@{
+    ViewBag.Title = "Delete Status";
+}
+
+<h2 class="viewHeader">@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete status '@Model.ProductStatusName'?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductStatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductStatusName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

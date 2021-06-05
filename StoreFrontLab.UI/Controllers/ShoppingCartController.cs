@@ -7,6 +7,7 @@ using StoreFrontLab.UI.Models;
 
 namespace StoreFrontLab.UI.Controllers
 {
+    [Authorize]
     public class ShoppingCartController : Controller
     {
         // GET: ShoppingCart

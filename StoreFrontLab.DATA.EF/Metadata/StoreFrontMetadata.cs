@@ -7,9 +7,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StoreFrontLab.DATA.EF
 {
+    #region Product Metadata
     public class ProductMetadata
     {
-        #region Product Metadata
+        
         //public int ProductID { get; set; }
         [Required(ErrorMessage = "Value is a required field.")]
         [StringLength(100, ErrorMessage = "Value must be 100 characters or less.")]
@@ -64,7 +65,7 @@ namespace StoreFrontLab.DATA.EF
         public int MakeID { get; }
 
         [Required(ErrorMessage = "Value is a required field.")]
-        [Display(Name = "Make")]
+        [Display(Name = "Make Name")]
         public string MakeName { get; set; }
     }
 
@@ -82,7 +83,7 @@ namespace StoreFrontLab.DATA.EF
         public int ProductStatusID { get; }
 
         [Required(ErrorMessage = "Value is a required field.")]
-        [Display(Name = "Status")]
+        [Display(Name = "Status Name")]
         public string ProductStatusName { get; set; }
     }
 
@@ -100,7 +101,7 @@ namespace StoreFrontLab.DATA.EF
         public int TypeID { get; }
 
         [Required(ErrorMessage = "Value is a required field.")]
-        [Display(Name = "Type")]
+        [Display(Name = "Type Name")]
         public string TypeName { get; set; }
     }
 

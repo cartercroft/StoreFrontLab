@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace StoreFrontLab.UI.Controllers
 {
-    [Authorize(Roles = "Customer")]
+    [Authorize]
     public class ManageController : Controller
     {
         public ManageController()

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace StoreFrontLab.UI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class AccountController : Controller
     {
         public AccountController()
