@@ -21,6 +21,78 @@ namespace StoreFrontLab.UI.Controllers
             return View(db.ProductMakes.ToList());
         }
 
+        #region AJAX CRUD Functionality
+        //All methods below were built from scratch to allow async functionality.
+
+        //The following action deletes a publisher record - returns only JSON on id and confirmation
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult AjaxDelete(int id)
+        {
+            ProductMake make = db.ProductMakes.Find(id);
+            db.ProductMakes.Remove(make);
+            db.SaveChanges();
+
+            string confirmMessage = string.Format("Deleted Publisher '{0}' from the database", make.MakeName);
+            return Json(new { id = id, message = confirmMessage });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult AjaxCreate(ProductMake make)
+        {
+            db.ProductMakes.Add(make);
+            db.SaveChanges();
+            return Json(make);
+
+            //Create partial view (PublisherCreate.cshtml)
+            //Template and Model : Publisher - Create,
+            //Data Context : BookStorePlusEntities
+            //Check 'Create as partial view' option
+        }
+
+        //POST ACTION
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult AjaxEdit(ProductMake make)
+        {
+            db.Entry(make).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(make);
+        }
+        #endregion
+
+        #region AJAX Partials
+        //Details - AJAX Modal - get PartialView for Details with AJAX display - generate this view like normal but choose Details scaffolding/ check the partial view option
+        [HttpGet]
+        public PartialViewResult ProductMakeDetails(int id)
+        {
+            ProductMake make = db.ProductMakes.Find(id);
+            return PartialView(make);
+
+            //Create a partial view for details:
+            //1. Template - Details
+            //2. Model class - Publisher
+            //3. Data Context - BookStorePlusEntities
+            //4. Check the 'Create as partial view' option
+        }
+        //Below is AJAX Create functionality, return the created publisher record as JSON
+
+
+        //Below is our AJAX Edit functionality, it renders a form to edit the publisher
+        //GET ACTION
+        [HttpGet]
+        public PartialViewResult ProductMakeEdit(int id)
+        {
+            ProductMake make = db.ProductMakes.Find(id);
+            return PartialView(make);
+
+            //Create partial view
+            //Template and Model : Publisher - Edit,
+            //Data Context : BookStorePlusEntities
+            //Check 'Create as partial view' option
+        }
+        #endregion
+
         // GET: ProductMakes/Details/5
         public ActionResult Details(int? id)
         {

@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductMakesController.cs" />
@@ -364,6 +365,7 @@
     <Content Include="Content\img\customer1.jpg" />
     <Content Include="Content\img\customer2.jpg" />
     <Content Include="Content\img\customer3.jpg" />
+    <Content Include="Content\img\OhSnap.png" />
     <Content Include="Content\img\wordpress.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -548,6 +550,10 @@
     <Content Include="Views\ProductTypes\Details.cshtml" />
     <Content Include="Views\ProductTypes\Edit.cshtml" />
     <Content Include="Views\ProductTypes\Index.cshtml" />
+    <Content Include="Views\ProductMakes\ProductMakeCreate.cshtml" />
+    <Content Include="Views\ProductMakes\ProductMakeDetails.cshtml" />
+    <Content Include="Views\ProductMakes\ProductMakeEdit.cshtml" />
+    <Content Include="Views\Errors\Unresolved.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,15 +19,16 @@ namespace StoreFrontLab.UI
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      //"~/Content/js/jquery.min.js",
                       "~/Scripts/bootstrap.min.js",
-                      "~/Content/js/jquery.min.js",
                       "~/Scripts/DataTables/jquery.dataTables.min.js",
                       "~/Content/js/jquery.waypoints.min.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/DataTables/css/jquery.datatables.min.css",                     
+                      "~/Content/DataTables/css/jquery.datatables.min.css",
                       "~/Content/site.css"));
         }
     }

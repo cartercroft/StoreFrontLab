@@ -202,3 +202,37 @@ div.priceBoxContent {
 #productsTable{
     margin-bottom: 1%;
 }
+
+#ProductMakeDetails{
+    background-color: lightslategray; 
+    text-align: center;
+    border-radius: 0 0 3em 3em;
+    color: white;
+}
+
+.ui-button{
+    position: absolute;
+    bottom: 0;
+    left: 43%;
+    border-radius: 3%;
+}
+
+.ui-dialog-titlebar{
+    text-align: center;
+    border-radius: 3em 3em 0 0;
+    background-color: gray;
+    color: white;
+}
+
+.ui-dialog{
+    z-index: 2;
+}
+
+.ui-widget-overlay {
+    background-color: rgba(64,62,56, .6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

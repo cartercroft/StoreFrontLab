@@ -9,10 +9,17 @@
         <div class="col-md-10">
             <h2 class="text-center viewHeader">@ViewBag.Title</h2>
 
+
             <p>
-                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+                @*@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })*@
+                <button id="toggleProductMakeCreate" class="btn btn-success text-right">Add New</button>
             </p>
-            <table class="table">
+
+            <div id="ProductMakeCreate">
+                @Html.Partial("ProductMakeCreate", new StoreFrontLab.DATA.EF.ProductMake())
+            </div>
+
+            <table class="table" id="ProductMakesTable">
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.MakeName)
@@ -22,19 +29,183 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr id="ProductMake-@item.MakeID">
                         <td>
                             @Html.DisplayFor(modelItem => item.MakeName)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MakeID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MakeID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MakeID })
+                            <a href="" class="DetailsLink" id="@item.MakeID">Details</a> |
+                            <a href="" class="EditLink" id="@item.MakeID">Edit</a> |
+
+                            @Ajax.ActionLink("Delete", "AjaxDelete", "ProductMakes", new { id = item.MakeID}, new AjaxOptions { HttpMethod = "POST",
+                           Confirm = $"Are you sure you want to delete {item.MakeName} from Product Makes?",
+                           OnSuccess = "deleteConfirmed",
+                           OnFailure = "deleteFailed"
+                            })
                         </td>
                     </tr>
                 }
 
             </table>
+
+            <!-- Placeholder div for Details modal -->
+            <div id="ProductMakeDetails"></div>
+
         </div>
     </div>
 </div>
+
+@section scripts{
+
+    <!-- ADDED jQuery Ajax CDN-->
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        //*************AJAX DELETE***************\\
+        function deleteConfirmed(response, status, data) {
+            //remove the row from the table onscreen
+            var rowID = "#ProductMake-" + response.id;
+            $("#ProductMakesTable").find(rowID).remove();
+
+            //Display a status message (Use AJAX/s response message property)
+            $("#MessageContent").html("<div class='alert alert-success'>" + response.message + "</div>");
+        }
+
+        //Failed delete attempt
+        function deleteFailed(response, status, data) {
+            //Display a status message (Use AJAX response message property)
+            $("#MessageContent").html("<div class='alert alert-danger'>Delete unsuccessful. Is the Make referenced by a Product? Remove reference before deletion.</div>");
+        }
+
+
+        //*************AJAX DETAILS************\\
+        $('a.DetailsLink').click(function (e) {
+            e.preventDefault(); // This prevents the anchor tag from reloading the page
+
+            // Target pop-up placeholder div
+            $('#ProductMakeDetails').data('pId', $(this).attr('id')).dialog({
+                // We called the dialog function from jQueryUI and set specific settings for that dialogue here
+                width: 400,
+                height: 200,
+                open: function () {
+                    var pMakeId = $(this).data('pId');
+                    $(this).load("/ProductMakes/ProductMakeDetails/" + pMakeId);
+                },
+                title: "Make Details",
+                modal: true,
+                resizable: false
+            });
+            // Pass it data(this - clicked Link's ID)
+
+            // Apply jQueryUI plugin to make it a popup with various settings
+
+            // Open Publisher details view in a popup with the correct publisher
+        });
+
+
+        //***************AJAX CREATE***************\\
+        //Show the create form
+        $('#ProductMakeCreate').hide(); //Start the page load with the create form hidden
+        $('#toggleProductMakeCreate').click(function () {
+            $('#ProductMakeCreate').toggle(); //Flip the create form between hidden and visible
+        });
+
+        // Summary: When the form is submitted, we format data (Serialize) the data. The notification (MessageContent) will show status updates.
+
+        // jQuery AJAX will:
+        // Call the POST AjaxCreate action from Publishers controller
+        // Pass JSON data from form
+        // On fail: Notify user of an error
+        // On success: Notify the user, reset the form, and "add" the new row to the Publishers table on this page
+        $('#ProductMakeCreateForm').submit(function (e) {
+            var formData = $(this).serializeArray(); // Capturing all of the inputs from the form and storing them in a JSON array
+            console.log(formData);
+            e.preventDefault();
+
+            $.ajax({
+                url: "/ProductMakes/AjaxCreate",
+                type: "POST",
+                data: formData,
+                datatype: "json",
+                error: function (e) {
+                    $("#MessageContent").html("<div class = 'alert alert-danger'>There was a problem creating this Make.</div>")
+                },
+                success: function (s) {
+                    $("#MessageContent").html("<div class = 'alert alert-success'>Record Added!</div>")
+                    // Reset the form
+                    $("#ProductMakeCreateForm")[0].reset();
+                    // Add the row with the code below
+                    $(function () {
+                        var row = "<tr>" +
+                            "<td>" + s.MakeName + "</td>" +
+                            "<td>Refresh to View Options</td></tr>";
+                        $("#ProductMakesTable").append(row);
+                    });
+                }
+            });
+        });
+
+        //*********************AJAX EDIT********************\\
+        var originalContent = null;
+        $('a.EditLink').click(function (e) {
+            e.preventDefault(); //Keeps the page from refreshing
+            var makeID = $(this).attr("id");
+            var row = $("#ProductMake-" + makeID).children(); //Finds all the table data for that SPECIFIC row
+
+            //Assemble a JSON object that holds all the values from that row
+            originalContent = {
+                MakeID: makeID,
+                MakeName: row[0].innerText,
+            };
+            console.log(originalContent);
+
+            $.get("/ProductMakes/ProductMakeEdit/" + makeID, function (data) {
+                $('#ProductMake-' + makeID).replaceWith(
+                    '<tr id="ProductMake-' + makeID + '"><td colspan = "5">' + data + '</td></tr>'
+                );
+            });
+        });
+        $(document).on('click', '#saveUpdate', function () {
+            //The code here is the post functionality
+
+            //Serialize the data from the form
+            var formData = $('#ProductMakeEditForm').serializeArray();
+
+            //Display a message to the user in #MessageContent
+            $('#MessageContent').html('<div class = "alert alert-info">Please wait...</div>');
+
+            //Call Ajax function to deal with posting that data to the server (Handling the UI in the event of a post)
+            $.ajax({
+                url: "/ProductMakes/AjaxEdit",
+                type: "POST",
+                data: formData,
+                datatype: "json",
+                success: function (data) {
+                    //Change #MessageContent to display that the result succeeded in the edit
+                    $("#MessageContent").html('<div class="alert alert-success">Your record was successfully updated</div>');
+                    $("#ProductMakeEditForm")[0].reset();
+
+                    $(function () {
+                        var row = '<tr>' +
+                            '<td>' + data.MakeName + '</td>' +
+                            '<td>Refresh to View Options</td>' +
+                            '</tr>';
+
+                        $('#ProductMake-' + data.MakeID).replaceWith(row);
+                    });
+                },
+                error: function (e) {
+                    $("#MessageContent").html('<div class="alert alert-warning">There was an error. Please try again or contact the site admin.</div>');
+                    $(function () {
+                        var row = '<tr id="ProductMake-' + originalContent.MakeID + '">' +
+                            '<td>' + originalContent.MakeName + '</td>' +
+                            '<td>Refresh to View Options</td>' +
+                            '</tr>';
+                        $('#ProductMake-' + data.MakeID).replaceWith(row);
+                    });
+                }
+            });
+        });
+    </script>
+}
